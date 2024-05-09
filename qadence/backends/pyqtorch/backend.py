@@ -74,7 +74,7 @@ class Backend(BackendInterface):
             else flatten(block),
             # scale_primitive_blocks_only,
         ]
-        block = transpile(*transpilations)(observable)  # type: ignore[call-overload]
+        block = transpile(*transpilations)(observable)  # type: ignore[call-overload,arg-type]
 
         (native,) = convert_observable(block, n_qubits=n_qubits, config=self.config)
         return ConvertedObservable(native=native, abstract=block, original=observable)
@@ -89,11 +89,6 @@ class Backend(BackendInterface):
         unpyqify_state: bool = True,
     ) -> Tensor:
         n_qubits = circuit.abstract.n_qubits
-
-        print()
-        print("PyQ backend run param values:")
-        print(param_values)
-        print()
 
         if state is None:
             # If no state is passed, we infer the batch_size through the length

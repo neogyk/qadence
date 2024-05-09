@@ -15,7 +15,6 @@ def backend_factory(
 ) -> Backend | DifferentiableBackend:
     backend_inst: Backend | DifferentiableBackend
     backends = available_backends()
-    print(backends)
     try:
         backend_name = BackendName(backend)
     except ValueError:
